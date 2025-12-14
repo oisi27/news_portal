@@ -1,0 +1,7 @@
+1. In Terminal run: 
+npm install -g json-server
+
+2. In Terminal run: 
+json-server --watch db.json --port 3000
+
+3. Run index.html 

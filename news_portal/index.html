@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header id="main-header" class="hidden">
+            <div class="header-container">
+                <div class="logo-area">
+                    <h1 class="logo">📰 News Portal</h1>
+                </div>
+                <nav class="nav-links">
+                    <button id="nav-home" class="nav-btn active">Home</button>
+                    <button id="nav-create" class="nav-btn">Create News</button>
+                </nav>
+                <div class="user-info">
+                    <div class="user-badge">
+                        <span id="logged-user-name">Guest</span>
+                        <small id="logged-user-email"></small>
+                    </div>
+                    <button id="logout-btn" class="btn btn-logout">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Login Page -->
+        <section id="login-page" class="page">
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-header">
+                        <h1>Welcome Back</h1>
+                        <p>Select your account to continue</p>
+                    </div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="user-select">Select User</label>
+                            <select id="user-select" required>
+                                <option value="">Loading users...</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Login</button>
+                    </form>
+                    <!-- <div class="server-hint">
+                        <p>Ensure JSON Server is running: <br><code>json-server --watch db.json --port 3000</code></p>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- News List Page -->
+        <section id="news-list-page" class="page hidden">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Latest News</h2>
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search news by title...">
+                        <button id="search-btn" class="btn btn-secondary">🔍</button>
+                    </div>
+                </div>
+
+                <div id="news-list" class="news-grid">
+                    <!-- News items injected via JS -->
+                </div>
+
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </section>
+
+        <!-- Create News Page -->
+        <section id="create-news-page" class="page hidden">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>Create Article</h2>
+                    </div>
+                    <form id="create-news-form">
+                        <div class="form-group">
+                            <label for="news-title">Title</label>
+                            <input type="text" id="news-title" placeholder="Enter an engaging title" required>
+                            <span class="error-text" id="title-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="news-body">Content</label>
+                            <textarea id="news-body" rows="10" placeholder="Write your article content here..."
+                                required></textarea>
+                            <div class="char-counter">
+                                <span id="body-char-count">0</span> / 20 characters min
+                            </div>
+                            <span class="error-text" id="body-error"></span>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="cancel-create" class="btn btn-text">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Publish News</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Edit News Page -->
+        <section id="edit-news-page" class="page hidden">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>Edit Article</h2>
+                    </div>
+                    <form id="edit-news-form">
+                        <input type="hidden" id="edit-news-id">
+                        <div class="form-group">
+                            <label for="edit-news-title">Title</label>
+                            <input type="text" id="edit-news-title" required>
+                            <span class="error-text" id="edit-title-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-news-body">Content</label>
+                            <textarea id="edit-news-body" rows="10" required></textarea>
+                            <div class="char-counter">
+                                <span id="edit-body-char-count">0</span> / 20 characters min
+                            </div>
+                            <span class="error-text" id="edit-body-error"></span>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="cancel-edit" class="btn btn-text">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update Article</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Detail Page -->
+        <section id="news-detail-page" class="page hidden">
+            <div class="container">
+                <button id="back-to-list" class="btn btn-back">← Back to News</button>
+
+                <article id="news-detail" class="news-detail-card">
+                    <!-- Detail content injected via JS -->
+                </article>
+
+                <div class="comments-wrapper">
+                    <h3>Discussion (<span id="comment-count">0</span>)</h3>
+
+                    <div id="comments-list" class="comments-list">
+                        <!-- Comments injected via JS -->
+                    </div>
+
+                    <div class="add-comment-box">
+                        <h4>Leave a comment</h4>
+                        <form id="comment-form">
+                            <div class="form-group">
+                                <textarea id="comment-text" rows="3" placeholder="Share your thoughts..."
+                                    required></textarea>
+                                <span class="error-text" id="comment-error"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overlay Components -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="toast" class="toast hidden">
+            <span id="toast-message">Action successful</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
